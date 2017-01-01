@@ -109,6 +109,26 @@ const UserQuery = {
       });
     },
   },
+  enteredPoints: {
+    description: 'List of points in device screen area.',
+    type: new GraphQLList(PointObject),
+    args: {
+      bottomLeft: { type: new GraphQLList(GraphQLFloat), description: 'bottomLeft' },
+      upperRight: { type: new GraphQLList(GraphQLFloat), description: 'upperRight' },
+    },
+    resolve: (source, { bottomLeft, upperRight }, { user }) => {
+      return new Promise((resolve, reject) => {
+        const query = UserModel.find({
+          point: {
+            $geoWithin: {
+              $box: [bottomLeft, upperRight],
+            },
+          },
+        });
+        return query.exec().then((users) => resolve(users));
+      });
+    },
+  },
 };
 
 export default UserQuery;

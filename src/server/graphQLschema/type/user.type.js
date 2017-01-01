@@ -10,7 +10,7 @@ import {
   GraphQLInterfaceType,
   GraphQLBoolean,
 } from 'graphql';
-import { PointObject } from 'graphql-geojson';
+import Point from './point.type';
 
 import GraphQLDate from 'graphql-date';
 import mongoose from 'mongoose';
@@ -33,9 +33,8 @@ const User = new GraphQLObjectType({
     isPhoneValid: { type: GraphQLBoolean },
     validAt: { type: GraphQLDate },
     point: {
-      type: PointObject,
+      type: Point,
       resolve: (source) => ({
-        type: 'Point',
         coordinates: source.point,
       }),
     },

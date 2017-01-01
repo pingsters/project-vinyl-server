@@ -3,7 +3,6 @@ import mongoose from './util/mongoose.util.js';
 import graphqlHTTP from 'express-graphql';
 import schema from './graphQLschema/index';
 import jwtUtil from './util/jwt.util';
-import config from 'config';
 
 const app = express();
 
