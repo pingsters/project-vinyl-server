@@ -42,6 +42,7 @@ export default class UserController {
 
   static createUser(req, res, next) {
     const { email, name, password } = req.body;
+    console.log(req.body);
     return UserModel.create({ email, name, password })
       .then((user)=> {
         user.accessToken = jwtUtil.createAccessToken(user);
